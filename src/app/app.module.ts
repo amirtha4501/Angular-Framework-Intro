@@ -17,6 +17,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import {MatSliderModule} from '@angular/material/slider';
+
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -66,7 +68,8 @@ import { from } from 'rxjs';
     MatListModule,
     MatSelectModule,
     MatSlideToggleModule,
-    MatProgressSpinnerModule  
+    MatProgressSpinnerModule,
+    MatSliderModule  
   ],
   entryComponents: [
     LoginComponent
