@@ -23,6 +23,7 @@ export class DishdetailComponent implements OnInit {
 
   commentForm: FormGroup;
   comment: Comment;
+  dishCopy: Dish;
   
   date = Date.now();
   
@@ -63,7 +64,7 @@ export class DishdetailComponent implements OnInit {
     this.dishService.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
     this.route.params.pipe(switchMap((params: Params) => this.dishService.getDish(params['id'])))
     .subscribe(
-      dish => { this.dish = dish; this.setPrevNext(dish.id); },
+      dish => { this.dish = dish; this.dishCopy = dish; this.setPrevNext(dish.id); },
       errmess => this.errMess = <any>errmess
       );
   }
@@ -111,22 +112,25 @@ export class DishdetailComponent implements OnInit {
 
   onSubmit() {
     this.comment = this.commentForm.value;
-    console.log(this.comment);
-    this.commentForm.reset(
-      {
-        author: '',
-        rating: 5,
-        comment: '',
-        date: ''
+    this.comment.date = new Date().toISOString();
+    this.dishCopy.comments.push(this.comment);
+    this.dishService.putDish(this.dishCopy)
+      .subscribe(dish => {
+        this.dish = dish;
+        this.dishCopy = dish;
+      },
+      errmess => {
+        this.dish = null;
+        this.dishCopy = null;
+        this.errMess = <any>errmess;
       }
-    );
-    this.dish.comments.push(this.comment);
-    this.commentFormDirective.resetForm({
-      author: '',
-      rating: 5,
-      comment: '',
-      date: ''
-    });
+      );
+    this.commentFormDirective.resetForm(); 
+    this.commentForm.reset({
+          author: '',
+          rating: 5,
+          comment: '',
+        });
   }
 
 }
