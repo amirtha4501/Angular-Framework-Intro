@@ -6,7 +6,7 @@
         fxLayoutGap="10px" 
         fxLayoutGap.xs="0">
 
-    <div fxFlex="40" *ngIf="dish">
+    <div fxFlex="40" *ngIf="dish" [@visibility]="visibility">
         <mat-card>
             <mat-card-header>
                 <mat-card-title>
@@ -34,16 +34,9 @@
                 </button>                
             </mat-card-actions>
         </mat-card>
-        <!-- <div [hidden]="dish || errMess">
-            <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
-        </div>
-        <div *ngIf="errMess">
-            <h2>Error</h2>
-            <h4>{{ errMess }}</h4>
-        </div> -->
     </div>
 
-    <div fxFlex="40" *ngIf="dish">
+    <div fxFlex="40" *ngIf="dish" [@visibility]="visibility">
         <mat-card>
             <mat-card-header>
                 <mat-card-title>
@@ -81,13 +74,6 @@
                     </mat-list-item>
                 </mat-list>
             </mat-card-content>
-            <!-- <div [hidden]="dish || errMess">
-                <mat-spinner></mat-spinner><h4>Loading . . . Please Wait</h4>
-            </div>
-            <div *ngIf="errMess">
-                <h2>Error</h2>
-                <h4>{{ errMess }}</h4>
-            </div> -->
             <form novalidate [formGroup]="commentForm" #cform="ngForm" (ngSubmit)="onSubmit()">
                 <p>
                     <mat-form-field class="half-width">
