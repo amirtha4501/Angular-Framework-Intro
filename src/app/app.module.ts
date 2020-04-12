@@ -20,7 +20,8 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSliderModule } from '@angular/material/slider';
 import { HttpClientModule } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
-
+import { RestangularModule, Restangular } from 'ngx-restangular';
+import { RestangularConfigFactory } from './shared/restConfig';
 import 'hammerjs';
 
 import { AppComponent } from './app.component';
@@ -43,6 +44,7 @@ import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 import { baseURL } from './shared/baseurl';
 import { HighlightDirective } from './directives/highlight.directive';
 import { from } from 'rxjs';
+import { FeedbackService } from './services/feedback.service';
 
 @NgModule({
   declarations: [
@@ -78,7 +80,9 @@ import { from } from 'rxjs';
     MatProgressSpinnerModule,
     MatSliderModule,
     HttpClientModule,
-    HttpModule  
+    HttpModule,
+    RestangularModule.forRoot(RestangularConfigFactory)  
+
   ],
   entryComponents: [
     LoginComponent
@@ -88,6 +92,7 @@ import { from } from 'rxjs';
     PromotionService, 
     LeaderService,
     ProcessHTTPMsgService,
+    FeedbackService,
     {provide: 'BaseURL', useValue: baseURL}
   ],
   bootstrap: [AppComponent]
