@@ -60,15 +60,12 @@
                     <mat-list-item *ngIf="commentForm.valid">
                         <p matLine>
                             {{commentForm.value.comment}}
-                            <!-- {{commentForm.get('comment').value}} -->
                         </p>
                         <p matLine>
                             {{commentForm.value.rating}} stars
-                            <!-- {{commentForm.get('rating').value}} -->
                         </p>
                         <p matLine>
                             -- {{commentForm.value.author}} 
-                            <!-- {{commentForm.get('author').value}} -->
                             {{ commentForm.value.date | date }}
                         </p>
                     </mat-list-item>
