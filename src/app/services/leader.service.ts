@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { baseURL } from '../shared/baseurl';
 import { map, catchError } from 'rxjs/operators';
 import { ProcessHTTPMsgService } from '../services/process-httpmsg.service';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -19,17 +20,17 @@ export class LeaderService {
   ) { }
 
   getLeaders(): Observable<Leader[]> {
-    return this.http.get<Leader[]>(baseURL + 'leadership')
+    return this.http.get<Leader[]>(`${environment.api}/leadership`)
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }
 
   getLeader(id: string): Observable<Leader> {
-    return this.http.get<Leader>(baseURL + 'leadership/' + id )
+    return this.http.get<Leader>(`${environment.api}/leadership/` + id )
       .pipe(catchError(this.processHTTPMsgService.handleError)); 
   }
 
   getFeaturedLeader(): Observable<Leader> {
-    return this.http.get<Leader[]>(baseURL + 'leadership?featured=true')
+    return this.http.get<Leader[]>(`${environment.api}/leadership?featured=true`)
       .pipe(map(promotions => promotions[0]))
       .pipe(catchError(this.processHTTPMsgService.handleError));
   }
